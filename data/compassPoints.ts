@@ -18,6 +18,7 @@ export interface CompassPoint {
   title: string;
   lesson: string;
   scripture: string;
+  scriptureReference?: string; // Optional reference for the scripture (e.g., "John 3:16")
   application: string;
   category: 'faith' | 'hope' | 'love' | 'repentance' | 'service' | 'gratitude' | 'forgiveness' | 'patience' | 'humility' | 'courage';
   familyStories: FamilyStory[];
