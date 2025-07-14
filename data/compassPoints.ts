@@ -20,6 +20,7 @@ export interface CompassPoint {
   scripture: string;
   scriptureReference?: string; // Optional reference for the scripture (e.g., "John 3:16")
   application: string;
+  reflectionQuestions?: string[]; // Optional array of reflection questions
   category: 'faith' | 'hope' | 'love' | 'repentance' | 'service' | 'gratitude' | 'forgiveness' | 'patience' | 'humility' | 'courage';
   familyStories: FamilyStory[];
 }
@@ -310,6 +311,12 @@ export function generateCalendarCompassPoints(): CompassPoint[] {
     const scriptureIndex = (dayOfYear - 1) % categoryScriptures.length;
     const lessonIndex = (dayOfYear - 1) % categoryLessons.length;
 
+    // Split scripture into text and reference
+    const fullScripture = categoryScriptures[scriptureIndex];
+    const scriptureParts = fullScripture.split(' - ');
+    const scriptureText = scriptureParts[0];
+    const scriptureReference = scriptureParts.length > 1 ? scriptureParts[1] : undefined;
+
     const point: CompassPoint = {
       dayOfYear,
       date: currentDate,
@@ -318,7 +325,8 @@ export function generateCalendarCompassPoints(): CompassPoint[] {
       direction: getDirection(degree),
       title: `${monthTheme.focus} - Day ${dayOfYear}`,
       lesson: categoryLessons[lessonIndex],
-      scripture: categoryScriptures[scriptureIndex],
+      scripture: scriptureText,
+      scriptureReference,
       application: generateApplication(category, dayOfYear),
       category,
       familyStories: []

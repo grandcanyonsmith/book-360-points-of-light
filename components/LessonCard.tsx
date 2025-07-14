@@ -272,8 +272,9 @@ export default function LessonCard({ point, onClose }: LessonCardProps) {
                       className="mb-6"
                     >
                       <FamilyStoryInput
+                        dayOfYear={point.dayOfYear}
                         onSubmit={handleAddStory}
-                        onCancel={() => setShowStoryForm(false)}
+                        onClose={() => setShowStoryForm(false)}
                       />
                     </motion.div>
                   )}
@@ -288,18 +289,7 @@ export default function LessonCard({ point, onClose }: LessonCardProps) {
                       <p className="text-gray-400 text-sm">Be the first to share your thoughts!</p>
                     </div>
                   ) : (
-                    <AnimatePresence>
-                      {familyStories.map((story, index) => (
-                        <motion.div
-                          key={story.id}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                        >
-                          <FamilyStoryDisplay story={story} />
-                        </motion.div>
-                      ))}
-                    </AnimatePresence>
+                    <FamilyStoryDisplay stories={familyStories} dayOfYear={point.dayOfYear} />
                   )}
                 </div>
               </motion.div>
