@@ -2,33 +2,138 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   body {
-    @apply bg-spiritual-light text-gray-800;
-    font-family: 'Georgia', serif;
+    @apply bg-gradient-to-b from-spiritual-light via-white to-spiritual-peace text-gray-800;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  /* Custom selection colors */
+  ::selection {
+    @apply bg-spiritual-gold/30 text-spiritual-faith-dark;
+  }
+  
+  /* Improved focus styles for accessibility */
+  *:focus {
+    @apply outline-none;
+  }
+  
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-spiritual-faith;
   }
 }
 
 @layer components {
+  /* Enhanced compass point with gradient and glow */
   .compass-point {
-    @apply absolute w-8 h-8 bg-spiritual-gold rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg transition-all duration-300 hover:scale-110 hover:bg-yellow-400 cursor-pointer;
+    @apply absolute w-10 h-10 bg-gradient-to-br from-spiritual-gold to-spiritual-gold-dark rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-lg transition-all duration-300 hover:scale-125 hover:shadow-glow cursor-pointer;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
   
+  .compass-point.active {
+    @apply scale-125 shadow-glow-lg ring-4 ring-spiritual-gold/30;
+  }
+  
+  /* Modern card design */
   .lesson-card {
-    @apply bg-white rounded-lg shadow-md p-6 border-l-4 border-spiritual-faith hover:shadow-lg transition-all duration-300;
+    @apply bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-500;
   }
   
+  /* Beautiful scripture quotes */
   .scripture-quote {
-    @apply italic text-gray-600 border-l-4 border-spiritual-gold pl-4 my-4;
+    @apply relative italic text-gray-700 text-lg leading-relaxed border-l-4 border-spiritual-gold pl-6 py-4 my-8 bg-gradient-to-r from-spiritual-gold-light/20 to-transparent;
   }
   
+  .scripture-quote::before {
+    content: '"';
+    @apply absolute -left-2 -top-2 text-6xl text-spiritual-gold/30 font-script;
+  }
+  
+  /* Modern button styles */
   .spiritual-button {
-    @apply bg-spiritual-faith text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-300 font-medium;
+    @apply relative inline-flex items-center justify-center bg-gradient-to-r from-spiritual-faith to-spiritual-faith-dark text-white px-8 py-4 rounded-xl hover:shadow-lg transition-all duration-300 font-medium overflow-hidden;
+  }
+  
+  .spiritual-button::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full;
+    animation: shimmer 2s infinite;
+  }
+  
+  .spiritual-button:hover::before {
+    animation-duration: 1s;
+  }
+  
+  /* Glass morphism effect */
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-md border border-white/50 shadow-xl rounded-2xl;
+  }
+  
+  /* Text gradient */
+  .gradient-text {
+    @apply bg-gradient-to-r from-spiritual-faith via-spiritual-wisdom to-spiritual-faith bg-clip-text text-transparent;
+  }
+  
+  /* Animated underline */
+  .link-underline {
+    @apply relative;
+  }
+  
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-spiritual-gold transition-all duration-300;
+  }
+  
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+  
+  /* Loading spinner */
+  .spinner {
+    @apply w-12 h-12 border-4 border-spiritual-gold/20 border-t-spiritual-gold rounded-full animate-spin;
+  }
+}
+
+@layer utilities {
+  /* Smooth scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.spiritual.gold') theme('colors.gray.100');
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-full;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-spiritual-gold rounded-full hover:bg-spiritual-gold-dark;
+  }
+  
+  /* Text balance for better typography */
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Gradient border */
+  .gradient-border {
+    @apply relative;
+  }
+  
+  .gradient-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-2xl p-[1px] bg-gradient-to-r from-spiritual-gold via-spiritual-faith to-spiritual-wisdom -z-10;
   }
 } 
